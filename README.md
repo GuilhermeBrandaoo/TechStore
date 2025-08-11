@@ -5,11 +5,17 @@ O projeto foi criado como parte de um bootcamp de desenvolvimento web para prati
 
 📸 Demonstração do site
 Tela inicial:
+
+
 ![Site TechStore](https://github.com/user-attachments/assets/d1c38833-ba06-4308-8644-570c794bc735)
 
 
 Filtro por categoria:
+
+
 ![site techstore video 2](https://github.com/user-attachments/assets/fd459128-3544-4e35-b47f-1f5b74595887)
+
+
 
 ![video site 3](https://github.com/user-attachments/assets/c4e47669-8641-4c4f-82ba-802fcadb2ad9)
 
