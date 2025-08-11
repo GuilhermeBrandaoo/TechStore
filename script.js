@@ -1,13 +1,6 @@
-/*
-    Variáveis 
-    Funções
-    Laços de Repetição
-    Template String
-    Eventos
-    Seletores
-    Estruturas de Dados
-*/
+// Lista de produtos disponíveis na loja
 
+// Cada produto é um objeto com suas informações
 let produtos = [
     {
         id: 1,
@@ -90,28 +83,32 @@ let produtos = [
         descricao: "Notebook Windows premium"
     }
 ];
-let textoPesquisa = ""
-let categoriaAtual = "all"
 
-let containerProdutos = document.querySelector(".products-container")
-let input = document.querySelector(".search-input")
-let botoes = document.querySelectorAll(".category-btn")
 
+
+// Variáveis para guardar a pesquisa e a categoria atual
+let textoPesquisa = "";
+let categoriaAtual = "all"; // "all" significa mostrar todas as categorias
+
+// Pegando elementos HTML para manipular depois
+let containerProdutos = document.querySelector(".products-container");
+let input = document.querySelector(".search-input");
+let botoes = document.querySelectorAll(".category-btn");
+
+// Função para mostrar os produtos na tela
 function mostrarProdutos(){
-    let htmlProdutos = ""
+    let htmlProdutos = "";
 
+    // Filtra produtos pela categoria e pela pesquisa
     let produtosFiltrados = produtos.filter(produto => {
-        let passouCategoria = (categoriaAtual === "all" || produto.categoria === categoriaAtual)
+        let passouCategoria = (categoriaAtual === "all" || produto.categoria === categoriaAtual);
+        let passouPesquisa = produto.nome.toLowerCase().includes(textoPesquisa);
+        return passouPesquisa && passouCategoria;
+    });
 
-
-
-        let passouPesquisa = produto.nome.toLowerCase().includes(textoPesquisa)
-
-        return passouPesquisa && passouCategoria
-    })  
-
+    // Monta o HTML de cada produto filtrado
     produtosFiltrados.forEach(produto => {
-       htmlProdutos = htmlProdutos + `
+       htmlProdutos += `
         <div class="product-card">
             <img class="product-img" src="${produto.imagem}" alt="${produto.nome}">
             <div class="product-info">
@@ -120,45 +117,50 @@ function mostrarProdutos(){
               <p class="product-price">R$ ${produto.preco}</p>
               <button class="product-button">Ver detalhes</button>
             </div>
-          </div>
-        `
+        </div>
+        `;
     });
-    containerProdutos.innerHTML = htmlProdutos 
+
+    // Coloca o HTML no container de produtos
+    containerProdutos.innerHTML = htmlProdutos;
 }
 
+// Função para atualizar a pesquisa
 function pesquisar(){
-    textoPesquisa = input.value
-
-    mostrarProdutos()
-
+    textoPesquisa = input.value.toLowerCase(); // converte para minúsculo
+    mostrarProdutos();
 }
 
+// Função para trocar a categoria ativa
 function trocarCategoria(categoria){
-    categoriaAtual = categoria
-    botoes.forEach( botao => {
-        botao.classList.remove('active')
-        
-        if (botao.getAttribute("data-category") === categoria){
-            botao.classList.add("active")
-        }
-    })
+    categoriaAtual = categoria;
 
-    mostrarProdutos()
-    
+    // Remove a classe "active" de todos os botões e adiciona no selecionado
+    botoes.forEach(botao => {
+        botao.classList.remove('active');
+        if (botao.getAttribute("data-category") === categoria){
+            botao.classList.add("active");
+        }
+    });
+
+    mostrarProdutos();
 }
 
-window.onload = mostrarProdutos
-window.addEventListener('DOMContentLoaded', () => {
-    mostrarProdutos()
-    input.addEventListener('input', pesquisar)
+// Ao carregar a página, mostra os produtos
+window.onload = mostrarProdutos;
 
+// Quando o HTML estiver carregado, adiciona eventos
+window.addEventListener('DOMContentLoaded', () => {
+    mostrarProdutos(); // Mostra os produtos iniciais
+
+    // Quando digitar no campo de busca
+    input.addEventListener('input', pesquisar);
+
+    // Quando clicar em uma categoria
     botoes.forEach(botao => {
         botao.addEventListener('click', () => {
-            let categoria = botao.getAttribute("data-category")
-
-            trocarCategoria(categoria)
-            console.log(botoes)
-        })
-    })
-
-})
+            let categoria = botao.getAttribute("data-category");
+            trocarCategoria(categoria);
+        });
+    });
+});
