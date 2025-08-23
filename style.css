@@ -16,6 +16,7 @@
 }
 
 body {
+  overflow-x: hidden;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: var(--text-color);
   background-color: var(--light-gray);
@@ -77,6 +78,7 @@ header {
   background-color: var(--secondary-color);
   display: flex;
   justify-content: center;
+  overflow-x: hidden;
 }
 
 .categories-bar {
@@ -138,10 +140,10 @@ footer {
 }
 
 .products {
-  max-width: 1200px;
+  max-width: 100%;
   padding: 2rem;
   width: 100%;
-  margin: 0 auto;
+  margin: 0 auto;  
 }
 
 .products-container {
@@ -214,3 +216,67 @@ footer {
 .product-button:hover {
   background-color: #58bbfd;
 }
+
+/*Responsividade - Header*/
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin: 0 auto;
+  }
+
+  .search-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+  }
+
+.logo {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+}
+  /* Responsividade - Menu*/
+  @media (max-width: 768px) {
+    .categories-bar {
+      flex-wrap: nowrap;  /* impede que os botões quebrem para a linha de baixo */
+      overflow-x: auto;  /* adiciona rolagem horizontal se não couberem na tela */
+      -webkit-overflow-scrolling: touch; /* melhora o scroll em dispositivos iOS (rolagem suave) */
+      gap: 0.5rem; /* reduz o espaço entre os botões, para caber melhor */
+      display: flex;
+      justify-content: space-around;
+    }
+
+    .category-btn {
+      flex: 0 0 auto; /*Cada botão ocupa apenas seu tamanho*/
+      font-size: 0.9rem; 
+      padding: 0.5rem 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .section-principal h2 {
+      font-size: 1.8rem;
+    }
+
+    .section-principal p {
+      font-size: 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .products-container {
+      grid-template-columns: 1fr; /*Só com uma coluna no celular*/
+    }
+
+    .product-img {
+      height: 200px;
+    }
+  }
+
